@@ -1,6 +1,6 @@
 import {Injector, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {ComponentsComponent, ComponentsModule} from 'components';
+import {ComponentsComponent, ComponentsModule, TimerComponent} from 'components';
 import {createCustomElement} from '@angular/elements';
 
 @NgModule({
@@ -19,5 +19,7 @@ export class AppModule {
   ngDoBootstrap() {
     const element = createCustomElement(ComponentsComponent, {injector: this.injector});
     customElements.define('lib-components', element);
+    const element2 = createCustomElement(TimerComponent, {injector: this.injector});
+    customElements.define('lib-timer', element2);
   }
 }
