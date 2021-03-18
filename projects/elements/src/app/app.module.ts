@@ -1,16 +1,23 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
+import {Injector, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {ComponentsComponent, ComponentsModule} from 'components';
+import {createCustomElement} from '@angular/elements';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ComponentsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private injector: Injector) {
+  }
+
+  // tslint:disable-next-line:typedef
+  ngDoBootstrap() {
+    const element = createCustomElement(ComponentsComponent, {injector: this.injector});
+    customElements.define('lib-components', element);
+  }
+}
